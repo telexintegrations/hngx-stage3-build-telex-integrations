@@ -16,24 +16,24 @@ app.use(cors());
 const path = process.platform === 'win32' ? 'C:' : '/';
 
 // Disk check with error handling
-async function checkDiskUsage() {
-  try {
-    const { total, free, available } = diskusage.checkSync(path);
-    const used = total - free;
+// async function checkDiskUsage() {
+//   try {
+//     const { total, free, available } = diskusage.checkSync(path);
+//     const used = total - free;
     
-    return {
-      bytes: { total, free, used, available },
-      human: {
-        total: `${(total / 1024 ** 3).toFixed(2)} GB`,
-        free: `${(free / 1024 ** 3).toFixed(2)} GB`,
-        used: `${(used / 1024 ** 3).toFixed(2)} GB`,
-        available: `${(available / 1024 ** 3).toFixed(2)} GB`
-      }
-    };
-  } catch (error) {
-    throw new Error(`Disk check failed: ${error.message}`);
-  }
-}
+//     return {
+//       bytes: { total, free, used, available },
+//       human: {
+//         total: `${(total / 1024 ** 3).toFixed(2)} GB`,
+//         free: `${(free / 1024 ** 3).toFixed(2)} GB`,
+//         used: `${(used / 1024 ** 3).toFixed(2)} GB`,
+//         available: `${(available / 1024 ** 3).toFixed(2)} GB`
+//       }
+//     };
+//   } catch (error) {
+//     throw new Error(`Disk check failed: ${error.message}`);
+//   }
+// }
 
 // return endpoint (triggered by external scheduler)
 // app.get('/return', async (req, res) => {
@@ -74,7 +74,7 @@ app.post('/tick', (req: any, res: any) => {
     });
   }
 
-  // Process data (add your business logic here)
+  // Process data
   console.log('Received disk data:', data);
   
   res.json({
